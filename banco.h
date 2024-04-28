@@ -1,4 +1,4 @@
-#define TOTAL = 1000
+#define TOTAL 1000
 
 typedef struct Cliente {
     char nome[100];
@@ -23,3 +23,5 @@ typedef enum Erros {
     SEM_TRANSACOES,
     MAX_CLIENTES,
 } Erro;
+
+typedef Erro (*funcao)(Cliente[], int*);

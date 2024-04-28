@@ -1,6 +1,10 @@
+#include "banco.h"
 #include <stdio.h>
 
 int main() {
+    int pos;
+    Cliente contas[TOTAL];
+
     int opcao;
 
     do
