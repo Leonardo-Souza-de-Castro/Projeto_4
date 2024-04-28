@@ -25,3 +25,13 @@ typedef enum Erros {
 } Erro;
 
 typedef Erro (*funcao)(Cliente[], int*);
+
+Erro criar(Cliente[], int *pos);
+Erro apagar(Cliente[], int *pos);
+Erro listar(Cliente[], int *pos);
+Erro debitar(Cliente[], int *pos);
+Erro depositar(Cliente[], int *pos);
+Erro transferir(Cliente[], int *pos);
+Erro extrato(Cliente[], int *pos);
+
+void clearBuffer();

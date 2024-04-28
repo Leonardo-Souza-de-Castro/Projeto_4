@@ -2,8 +2,12 @@
 #include <stdio.h>
 
 int main() {
+    funcao fs[] = {criar, apagar, listar, debitar, depositar, extrato, transferir};
+
     int pos;
     Cliente contas[TOTAL];
+
+    Erro erro = OK;
 
     int opcao;
 
@@ -24,7 +28,7 @@ int main() {
         printf("Escolha uma opcao: ");
 
         scanf("%d", &opcao);
-        // clearBuffer();
+        clearBuffer();
         opcao--;
 
         if (opcao > 6)
@@ -32,33 +36,34 @@ int main() {
             printf("\nOpcao invalida.\n");
         }
         else if (opcao >= 0) {
+            erro = fs[opcao] (contas, &pos);
             if (opcao == 0)
             {
-                printf("Criar uma conta\n");
+                printf("\n");
             }
             else if (opcao == 1)
             {
-                printf("Apagar conta\n");
+                printf("\n");
             }
             else if (opcao == 2)
             {
-                printf("Listar todos os clientes\n");
+                printf("\n");
             }
             else if (opcao == 3)
             {
-                printf("Debito\n");
+                printf("\n");
             }
             else if (opcao == 4)
             {
-                printf("Deposito\n");
+                printf("\n");
             }
             else if (opcao == 5)
             {
-                printf("Extrato\n");
+                printf("\n");
             }
             else if (opcao == 6)
             {
-                printf("Transferencia\n");
+                printf("\n");
             }
             else{
                 printf("Saindo...\n");   
