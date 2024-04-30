@@ -36,11 +36,11 @@ Erro transferir(Cliente contas[], int *pos) {
 
     senha_destino[strcspn(senha_destino, "\n")] = 0;
 
-    printf("Insira o valor que gostaria de debitar desta conta: \n");
+    printf("Insira o valor que gostaria de transferir: \n");
     scanf("%f", &valor);
 
     while (valor <= 0) {
-        printf("Insira um valor valido para debito (maior que 0) \n");
+        printf("Insira um valor valido para transferir (maior que 0) \n");
         scanf("%f", &valor);
     }
     int i = 0;
