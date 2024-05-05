@@ -40,7 +40,7 @@ Erro depositar(Cliente contas[], int *pos) {
     }
   }
 
-  if (contador_erro >= pos) {
+  if (contador_erro >= *pos) {
     return NAO_ENCONTRADO;
   }
 
