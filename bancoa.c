@@ -46,7 +46,42 @@ Erro criar(Cliente contas[], int *pos) {
 }
 
 Erro apagar(Cliente contas[], int *pos) {
-    printf("Funcao apagar\n");
+    if (*pos == 0) {
+        return SEM_CLIENTES;
+    }
+
+    int pos_deletar = -1;
+    char cpf[12];
+
+    while (strlen(cpf) != 11){
+      printf("Digite seu CPF (apenas numeros): ");
+      scanf("%[^\n]", cpf);
+      clearBuffer();
+      if (strlen(cpf) != 11)
+        printf("CPF invalido.\n");
+    }
+
+    for (int i = 0; i < *pos; i++) {
+        if (strcmp(cpf, contas[i].cpf) == 0) {
+            pos_deletar = i;
+            break;
+        }
+    }
+
+    if (pos_deletar < 0 || pos_deletar >= *pos) {
+        return NAO_ENCONTRADO;
+    }
+
+    for (int i = pos_deletar; i < *pos - 1; i++) {
+        strcpy(contas[i].nome, contas[i + 1].nome);
+        strcpy(contas[i].cpf, contas[i + 1].cpf);
+        strcpy(contas[i].tipo_conta, contas[i + 1].tipo_conta);
+        contas[i].saldo = contas[i + 1].saldo;
+        strcpy(contas[i].senha, contas[i + 1].senha);
+    }
+
+    *pos = *pos - 1;
+
     return OK;
 }
 
