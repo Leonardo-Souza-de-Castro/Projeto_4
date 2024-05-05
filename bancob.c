@@ -35,7 +35,7 @@ Erro debitar(Cliente contas[], int *pos) {
     int i = 0;
     for (i; i < *pos; i++) {
         if (strcmp(contas[i].cpf, cpf) == 0 && strcmp(contas[i].senha, senha) == 0) {
-            if (strcmp(contas[i].tipo_conta, "Comum") == 0)
+            if (strcmp(contas[i].tipo_conta, "comum") == 0)
             {
                 taxa = 0.5*valor_debito;
                 if (contas[i].saldo - (valor_debito + taxa) < -1000)
