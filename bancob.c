@@ -90,13 +90,9 @@ Erro transferir(Cliente contas[], int *pos) {
         {
             contas[i].saldo = contas[i].saldo + valor;
         }
-        else {
-        contador_erro++;
+        else{
+          return NAO_ENCONTRADO;
         }
-    }
-
-    if (contador_erro >= pos) {
-        return NAO_ENCONTRADO;
     }
 
     return OK;
