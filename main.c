@@ -4,7 +4,7 @@
 int main() {
     funcao fs[] = {criar, apagar, listar, debitar, depositar, extrato, transferir};
 
-    int pos;
+    int pos = 0;
     Cliente contas[TOTAL];
 
     Erro erro = OK;
@@ -36,18 +36,24 @@ int main() {
             printf("\nOpcao invalida.\n");
         }
         else if (opcao >= 0) {
-            erro = fs[opcao] (contas, &pos);
+            erro = fs[opcao](contas, &pos);
             if (opcao == 0)
             {
-                printf("\n");
+                if (erro == MAX_CLIENTES)
+                    printf("Numero maximo de clientes atingido.\n"); 
             }
             else if (opcao == 1)
             {
-                printf("\n");
+                if (erro == SEM_CLIENTES)
+                    printf("Sem clientes para apagar.\n");
+                else if (erro == NAO_ENCONTRADO)
+                    printf("Cliente nao encontrado.\n");
+                else
+                    printf("Cliente apagado com sucesso!\n");
             }
             else if (opcao == 2)
             {
-                printf("\n");
+                printf("\n");      
             }
             else if (opcao == 3)
             {
