@@ -51,7 +51,16 @@ Erro apagar(Cliente contas[], int *pos) {
 }
 
 Erro listar(Cliente contas[], int *pos) {
-    printf("Funcao listar\n");
+  if (*pos == 0) {
+      return SEM_CLIENTES;
+  }
+  
+    for (int i = 0; i < *pos; i++) {
+      printf("Nome: %s\t", contas[i].nome);
+      printf("CPF: %c%c%c.%c%c%c.%c%c%c-%c%c\t", contas[i].cpf[0], contas[i].cpf[1], contas[i].cpf[2], contas[i].cpf[3], contas[i].cpf[4], contas[i].cpf[5], contas[i].cpf[6], contas[i].cpf[7], contas[i].cpf[8], contas[i].cpf[9], contas[i].cpf[10]);
+      printf("Tipo de conta: %s\t", contas[i].tipo_conta);
+      printf("Saldo: %.2f$\n", contas[i].saldo);
+    }
     return OK;
 }
 
