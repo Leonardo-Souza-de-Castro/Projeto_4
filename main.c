@@ -41,6 +41,8 @@ int main() {
             {
                 if (erro == MAX_CLIENTES)
                     printf("Numero maximo de clientes atingido.\n"); 
+                else
+                    printf("Cliente cadastrado com sucesso!\n");
             }
             else if (opcao == 1)
             {
@@ -53,7 +55,8 @@ int main() {
             }
             else if (opcao == 2)
             {
-                printf("\n");      
+                if (erro == SEM_CLIENTES)
+                    printf("Sem clientes para listar.\n");      
             }
             else if (opcao == 3)
             {
