@@ -86,9 +86,9 @@ Erro apagar(Cliente contas[], int *pos) {
 }
 
 Erro listar(Cliente contas[], int *pos) {
-  if (*pos == 0) {
-      return SEM_CLIENTES;
-  }
+    if (*pos == 0) {
+        return SEM_CLIENTES;
+    }
   
     for (int i = 0; i < *pos; i++) {
       printf("Nome: %s\t", contas[i].nome);

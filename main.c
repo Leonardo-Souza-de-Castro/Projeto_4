@@ -2,16 +2,15 @@
 #include <stdio.h>
 
 int main() {
-  funcao fs[] = {criar, apagar, listar, 
-  debitar, depositar, extrato, transferir};
+    funcao fs[] = {criar, apagar, listar, debitar, depositar, extrato, transferir};
 
-  int pos;
-  Cliente contas[TOTAL];
+    int pos = 0;
+    Cliente contas[TOTAL];
 
-  Erro erro = OK;
+    Erro erro = OK;
 
-  int opcao;
-
+    int opcao;
+  
   do {
     printf("\n");
     printf("Bem vindo ao Banco Quem Poupa Tem\n");
@@ -31,30 +30,55 @@ int main() {
     clearBuffer();
     opcao--;
 
-    if (opcao > 6) {
-      printf("\nOpcao invalida.\n");
-    } else if (opcao >= 0) {
-      erro = fs[opcao](contas, &pos);
-      if (opcao == 0) {
-        printf("\n");
-      } else if (opcao == 1) {
-        printf("\n");
-      } else if (opcao == 2) {
-        printf("\n");
-      } else if (opcao == 3) {
-        printf("\n");
-      } else if (opcao == 4) {
-        printf("\n");
-      } else if (opcao == 5) {
-        depositar(contas, pos);
-      } else if (opcao == 6) {
-        printf("\n");
-      } else {
-        printf("Saindo...\n");
-      }
-    }
-
-  } while (opcao >= 0);
+        if (opcao > 6)
+        {
+            printf("\nOpcao invalida.\n");
+        }
+        else if (opcao >= 0) {
+            erro = fs[opcao](contas, &pos);
+            if (opcao == 0)
+            {
+                if (erro == MAX_CLIENTES)
+                    printf("Numero maximo de clientes atingido.\n"); 
+                else
+                    printf("Cliente cadastrado com sucesso!\n");
+            }
+            else if (opcao == 1)
+            {
+                if (erro == SEM_CLIENTES)
+                    printf("Sem clientes para apagar.\n");
+                else if (erro == NAO_ENCONTRADO)
+                    printf("Cliente nao encontrado.\n");
+                else
+                    printf("Cliente apagado com sucesso!\n");
+            }
+            else if (opcao == 2)
+            {
+                if (erro == SEM_CLIENTES)
+                    printf("Sem clientes para listar.\n");      
+            }
+            else if (opcao == 3)
+            {
+                printf("\n");
+            }
+            else if (opcao == 4)
+            {
+                printf("\n");
+            }
+            else if (opcao == 5)
+            {
+                printf("\n");
+            }
+            else if (opcao == 6)
+            {
+                printf("\n");
+            }
+            else{
+                printf("Saindo...\n");   
+                }
+        }
+        
+    } while (opcao >= 0);
 
   // Salvar aqui
 }
