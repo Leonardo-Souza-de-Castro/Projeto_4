@@ -2,8 +2,8 @@
 #include <stdio.h>
 
 int main() {
-  funcao fs[] = {criar, apagar, listar, 
-  debitar, depositar, extrato, transferir};
+  funcao fs[] = {criar,     apagar,  listar,    debitar,
+                 depositar, extrato, transferir};
 
   int pos;
   Cliente contas[TOTAL];
