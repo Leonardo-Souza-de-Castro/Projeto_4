@@ -44,6 +44,11 @@ Erro debitar(Cliente contas[], int *pos) {
                 }else
                 {
                     contas[i].saldo = contas[i].saldo - (valor_debito + taxa);
+                    FILE *f = fopen(contas[i].nome, "w");
+                    for (i = 0; i < *pos; i++) {
+                        int qtd = fprintf(f, "Debitado: -%.2f | Tarifa: %.2f | Saldo: %.2f\n", valor_debito + taxa, taxa);
+                    }
+                    fclose(f);
                 }
                 
             }else
@@ -69,6 +74,7 @@ Erro debitar(Cliente contas[], int *pos) {
     if (contador_erro >= *pos) {
         return NAO_ENCONTRADO;
     }
+
 
     return OK;
 }
