@@ -178,6 +178,9 @@ Erro transferir(Cliente contas[], int *pos) {
                 }else
                 {
                     contas[i].saldo = contas[i].saldo - (valor + taxa);
+                    FILE *f = fopen(contas[i].nome, "a");
+                    int qtd = fprintf(f, "Debitado: -%.2f$ | Tarifa: %.2f$ | Saldo: %.2f$\n", valor + taxa, taxa, contas[i].saldo);
+                    fclose(f);
                 }
                 
             }else
@@ -191,6 +194,9 @@ Erro transferir(Cliente contas[], int *pos) {
                 }else
                 {
                     contas[i].saldo = contas[i].saldo - (valor + taxa);
+                    FILE *f = fopen(contas[i].nome, "a");
+                    int qtd = fprintf(f, "Debitado: -%.2f$ | Tarifa: %.2f$ | Saldo: %.2f$\n", valor + taxa, taxa, contas[i].saldo);
+                    fclose(f);
                 }
                 
             }
@@ -200,6 +206,9 @@ Erro transferir(Cliente contas[], int *pos) {
         else if (strcmp(contas[i].cpf, cpf_dest) == 0 && limite_atng == 0)
         {
             contas[i].saldo = contas[i].saldo + valor;
+            FILE *f = fopen(contas[i].nome, "a");
+            int qtd = fprintf(f, "Depositado: +%.2f$ | Tarifa: 0.0$ | Saldo: %.2f$\n", valor, contas[i].saldo);
+            fclose(f);
         }
         else{
           return NAO_ENCONTRADO;
