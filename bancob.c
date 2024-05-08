@@ -108,6 +108,9 @@ Erro depositar(Cliente contas[], int *pos) {
   for (int i = 0; i < *pos; i++) {
     if (strcmp(contas[i].cpf, cpf) == 0) {
       contas[i].saldo = contas[i].saldo + valor_depos;
+      FILE *f = fopen(contas[i].nome, "a");
+      int qtd = fprintf(f, "Depositado: +%.2f$ | Tarifa: 0.0$ | Saldo: %.2f$\n", valor_depos, contas[i].saldo);
+      fclose(f);
     } else {
       contador_erro++;
     }
