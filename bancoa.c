@@ -1,11 +1,6 @@
 #include "banco.h"
 #include <stdio.h>
 #include <string.h>
-#ifdef WIN32
-#include <io.h>
-#define F_OK 0
-#define access _access
-#endif
 
 Erro criar(Cliente contas[], int *pos) {
     if (*pos >= TOTAL) {
@@ -107,6 +102,7 @@ Erro listar(Cliente contas[], int *pos) {
 Erro extrato(Cliente contas[], int *pos) {
     char cpf[12];
     char senha[100];
+    char nome[100];
 
     while (strlen(cpf) != 11){
       printf("Digite seu CPF (apenas numeros): ");
@@ -123,7 +119,10 @@ Erro extrato(Cliente contas[], int *pos) {
     int i = 0;
     for (i; i < *pos; i++) {
         if (strcmp(cpf, contas[i].cpf) == 0 && strcmp(senha, contas[i].senha) == 0) {
-            FILE *f = fopen(contas[i].nome, "r");
+            strcpy(nome, contas[i].nome);
+            strcat(nome, ".txt");
+
+            FILE *f = fopen(nome, "r");
             char linha[100];
 
             while (fgets(linha, 100, f) != NULL) {
