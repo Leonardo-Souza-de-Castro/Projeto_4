@@ -103,6 +103,11 @@ Erro extrato(Cliente contas[], int *pos) {
     char cpf[12];
     char senha[100];
     char nome[100];
+    int cont_erro = 0;
+
+    if (*pos == 0) {
+        return SEM_CLIENTES;
+    }
 
     while (strlen(cpf) != 11){
       printf("Digite seu CPF (apenas numeros): ");
@@ -130,7 +135,12 @@ Erro extrato(Cliente contas[], int *pos) {
             }
 
             fclose(f);
+            cont_erro = 1;
         }
+    }
+
+    if (cont_erro == 0) {
+        return NAO_ENCONTRADO;
     }
 
     return OK;
