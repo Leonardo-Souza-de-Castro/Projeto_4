@@ -100,7 +100,49 @@ Erro listar(Cliente contas[], int *pos) {
 }
 
 Erro extrato(Cliente contas[], int *pos) {
-    printf("Funcao extrato\n");
+    char cpf[12];
+    char senha[100];
+    char nome[100];
+    int cont_erro = 0;
+
+    if (*pos == 0) {
+        return SEM_CLIENTES;
+    }
+
+    while (strlen(cpf) != 11){
+      printf("Digite seu CPF (apenas numeros): ");
+      scanf("%[^\n]", cpf);
+      clearBuffer();
+      if (strlen(cpf) != 11)
+        printf("CPF invalido.\n");
+    }
+
+    printf("Digite sua senha: ");
+    scanf("%[^\n]", senha);
+    clearBuffer();
+
+    int i = 0;
+    for (i; i < *pos; i++) {
+        if (strcmp(cpf, contas[i].cpf) == 0 && strcmp(senha, contas[i].senha) == 0) {
+            strcpy(nome, contas[i].nome);
+            strcat(nome, ".txt");
+
+            FILE *f = fopen(nome, "r");
+            char linha[100];
+
+            while (fgets(linha, 100, f) != NULL) {
+                printf("%s", linha);
+            }
+
+            fclose(f);
+            cont_erro = 1;
+        }
+    }
+
+    if (cont_erro == 0) {
+        return NAO_ENCONTRADO;
+    }
+
     return OK;
 }
 

@@ -1,6 +1,7 @@
 #include "banco.h"
 #include <stdio.h>
 #include <string.h>
+#include <stdlib.h>
 
 Erro debitar(Cliente contas[], int *pos) {
     char cpf[12];
@@ -8,6 +9,7 @@ Erro debitar(Cliente contas[], int *pos) {
     float valor_debito;
     float taxa;
     int contador_erro = 0;
+    char transacao[100];
 
     printf("Insira o CPF do titular da conta: \n");
     fgets(cpf, 12, stdin);
@@ -44,6 +46,8 @@ Erro debitar(Cliente contas[], int *pos) {
                 }else
                 {
                     contas[i].saldo = contas[i].saldo - (valor_debito + taxa);
+                    sprintf(transacao, "Debito: -%.2f$ | Tarifa: %.2f$ | Saldo: %.2f$", valor_debito + taxa, taxa, contas[i].saldo);
+                    criar_extrato(contas[i].nome, transacao);
                 }
                 
             }else
@@ -56,6 +60,9 @@ Erro debitar(Cliente contas[], int *pos) {
                 }else
                 {
                     contas[i].saldo = contas[i].saldo - (valor_debito + taxa);
+                    FILE *f = fopen(contas[i].nome, "a");
+                    int qtd = fprintf(f, "Debito: -%.2f$ | Tarifa: %.2f$ | Saldo: %.2f$\n", valor_debito + taxa, taxa, contas[i].saldo);
+                    fclose(f); 
                 }
                 
             }
@@ -69,6 +76,7 @@ Erro debitar(Cliente contas[], int *pos) {
     if (contador_erro >= *pos) {
         return NAO_ENCONTRADO;
     }
+
 
     return OK;
 }
@@ -101,6 +109,9 @@ Erro depositar(Cliente contas[], int *pos) {
   for (int i = 0; i < *pos; i++) {
     if (strcmp(contas[i].cpf, cpf) == 0) {
       contas[i].saldo = contas[i].saldo + valor_depos;
+      char transacao[100];
+      sprintf(transacao, "Deposito: +%.2f$ | Tarifa: 0.0$ | Saldo: %.2f$", valor_depos, contas[i].saldo);
+      criar_extrato(contas[i].nome, transacao);
     } else {
       contador_erro++;
     }
@@ -121,6 +132,7 @@ Erro transferir(Cliente contas[], int *pos) {
     float valor;
     float taxa;
     int contador_erro = 0;
+    char transacao[100];
 
     printf("Insira o CPF de origem da conta: \n");
     fgets(cpf_orig, 12, stdin);
@@ -168,6 +180,8 @@ Erro transferir(Cliente contas[], int *pos) {
                 }else
                 {
                     contas[i].saldo = contas[i].saldo - (valor + taxa);
+                    sprintf(transacao, "Debito: -%.2f$ | Tarifa: %.2f$ | Saldo: %.2f$", valor + taxa, taxa, contas[i].saldo);
+                    criar_extrato(contas[i].nome, transacao);
                 }
                 
             }else
@@ -181,6 +195,8 @@ Erro transferir(Cliente contas[], int *pos) {
                 }else
                 {
                     contas[i].saldo = contas[i].saldo - (valor + taxa);
+                    sprintf(transacao, "Debito: -%.2f$ | Tarifa: %.2f$ | Saldo: %.2f$", valor + taxa, taxa, contas[i].saldo);
+                    criar_extrato(contas[i].nome, transacao);
                 }
                 
             }
@@ -190,6 +206,8 @@ Erro transferir(Cliente contas[], int *pos) {
         else if (strcmp(contas[i].cpf, cpf_dest) == 0 && limite_atng == 0)
         {
             contas[i].saldo = contas[i].saldo + valor;
+            sprintf(transacao, "Deposito: +%.2f$ | Tarifa: 0.0$ | Saldo: %.2f$", valor, contas[i].saldo);
+            criar_extrato(contas[i].nome, transacao);
         }
         else{
           return NAO_ENCONTRADO;
@@ -198,3 +216,62 @@ Erro transferir(Cliente contas[], int *pos) {
 
     return OK;
 }
+
+void criar_extrato(char nome[], char transacao[]) {
+    FILE *f, *f_temp;
+    char linha[100];
+    int primeira_linha = 1;
+    char nome_arq[100];
+    
+    strcpy(nome_arq, nome);
+    strcat(nome_arq, ".txt");
+
+    f = fopen(nome_arq, "r+");
+
+    if (f == NULL) {
+        f = fopen(nome_arq, "w+");
+        if (f == NULL) {
+            printf("Erro ao criar o arquivo.\n");
+            exit(1);
+        }
+    }
+
+    int cont = 0;
+    while (fgets(linha, sizeof(linha), f) != NULL) {
+        cont++;
+    }
+
+    rewind(f);
+
+    if (cont >= TOTAL_TRANSACOES) {
+        f_temp = fopen("temp.txt", "w");
+        if (f_temp == NULL) {
+            printf("Erro ao criar o arquivo temp.\n");
+            exit(1);
+        }
+
+        while (fgets(linha, sizeof(linha), f) != NULL) {
+            if (primeira_linha == 1) {
+                primeira_linha = 0;
+                continue;
+            }
+            fprintf(f_temp, "%s", linha);
+        }
+        fprintf(f_temp, "%s\n", transacao);
+    
+        fclose(f_temp);
+        fclose(f);
+
+        remove(nome_arq);
+        rename("temp.txt", nome_arq);
+
+        return; 
+    }
+
+    fseek(f, 0, SEEK_END);
+
+    fprintf(f, "%s\n", transacao);
+
+    fclose(f);
+}
+
