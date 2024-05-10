@@ -1,5 +1,4 @@
 #define TOTAL 1000
-#define TOTAL_TRANSACOES 100
 
 typedef struct Cliente {
     char nome[100];
@@ -34,7 +33,5 @@ Erro debitar(Cliente[], int *pos);
 Erro depositar(Cliente[], int *pos);
 Erro transferir(Cliente[], int *pos);
 Erro extrato(Cliente[], int *pos);
-Erro salvar(Cliente[], int *pos);
-Erro carregar(Cliente[], int *pos);
-void criar_extrato(char nome[], char transacao[]);
+
 void clearBuffer();
