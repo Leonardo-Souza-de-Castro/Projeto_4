@@ -30,6 +30,10 @@ int main() {
     clearBuffer();
     opcao--;
 
+    erro = fs[8](contas, &pos);
+    if (erro != OK)
+            printf("Erro ao carregar os clientes!%d\n", erro);
+
         if (opcao > 6)
         {
             printf("\nOpcao invalida.\n");
@@ -77,6 +81,9 @@ int main() {
                 printf("Saindo...\n");   
                 }
         }
+        erro = fs[7](contas, &pos);
+        if (erro != OK)
+            printf("Erro ao salvar os clientes!%d\n", erro);
         
     } while (opcao >= 0);
 
