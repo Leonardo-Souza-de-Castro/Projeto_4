@@ -64,12 +64,12 @@ int main() {
             else if (opcao == 3)
             {
                 if(erro == NAO_ENCONTRADO)
-                    printf("Cliente não encontrado.\n")
+                    printf("Cliente não encontrado.\n");
             }
             else if (opcao == 4)
             {
                 if(erro == NAO_ENCONTRADO)
-                    printf("Cliente não encontrado.\n")
+                    printf("Cliente não encontrado.\n");
             }
             else if (opcao == 5)
             {
@@ -78,7 +78,7 @@ int main() {
             else if (opcao == 6)
             {
                 if(erro == NAO_ENCONTRADO)
-                    printf("Cliente não encontrado.\n")
+                    printf("Cliente não encontrado.\n");
             }
             else{
                 printf("Saindo...\n");   
