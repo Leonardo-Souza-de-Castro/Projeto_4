@@ -2,12 +2,14 @@
 #include <stdio.h>
 
 int main() {
-    funcao fs[] = {criar, apagar, listar, debitar, depositar, extrato, transferir};
+    funcao fs[] = {criar, apagar, listar, debitar, depositar, extrato, transferir, salvar, carregar};
 
     int pos = 0;
     Cliente contas[TOTAL];
 
-    Erro erro = OK;
+    Erro erro = fs[8](contas, &pos);
+    if (erro != OK)
+            printf("Clientes nao carregados!\n", erro);
 
     int opcao;
   
@@ -29,10 +31,6 @@ int main() {
     scanf("%d", &opcao);
     clearBuffer();
     opcao--;
-
-    erro = fs[8](contas, &pos);
-    if (erro != OK)
-            printf("Erro ao carregar os clientes!%d\n", erro);
 
         if (opcao > 6)
         {
@@ -64,12 +62,12 @@ int main() {
             else if (opcao == 3)
             {
                 if(erro == NAO_ENCONTRADO)
-                    printf("Cliente não encontrado.\n")
+                    printf("Cliente não encontrado.\n");
             }
             else if (opcao == 4)
             {
                 if(erro == NAO_ENCONTRADO)
-                    printf("Cliente não encontrado.\n")
+                    printf("Cliente não encontrado.\n");
             }
             else if (opcao == 5)
             {
@@ -78,7 +76,7 @@ int main() {
             else if (opcao == 6)
             {
                 if(erro == NAO_ENCONTRADO)
-                    printf("Cliente não encontrado.\n")
+                    printf("Cliente não encontrado.\n");
             }
             else{
                 printf("Saindo...\n");   
