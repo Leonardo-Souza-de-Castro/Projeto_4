@@ -14,22 +14,22 @@ Erro criar(Cliente contas[], int *pos) {
     scanf("%[^\n]", contas[*pos].nome);
     clearBuffer();
 
-    while (strlen(contas[(*pos)].cpf) != 11){
+    do {
       printf("Digite seu CPF (apenas numeros): ");
       scanf("%[^\n]", contas[*pos].cpf);
       clearBuffer();
       if (strlen(contas[(*pos)].cpf) != 11)
         printf("CPF invalido.\n");
-    }
+    } while (strlen(contas[(*pos)].cpf) != 11);
 
-    while (strcmp(contas[(*pos)].tipo_conta, "comum") != 0 && strcmp(contas[(*pos)].tipo_conta, "plus") != 0){
+    do {
       printf("Digite o tipo de conta (comum ou plus): ");
       scanf("%[^\n]", contas[*pos].tipo_conta);
       clearBuffer();
       if (strcmp(contas[(*pos)].tipo_conta, "comum") != 0 && strcmp(contas[(*pos)].tipo_conta, "plus") != 0)
         printf("Tipo de conta invalido.\n");
-    }
-
+    } while (strcmp(contas[(*pos)].tipo_conta, "comum") != 0 && strcmp(contas[(*pos)].tipo_conta, "plus") != 0);
+    
 
     printf("Digite seu saldo: ");
     scanf("%f", &contas[*pos].saldo);
@@ -42,7 +42,7 @@ Erro criar(Cliente contas[], int *pos) {
     *pos = *pos + 1;
 
 
-
+  
     return OK;
 }
 
